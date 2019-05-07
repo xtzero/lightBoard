@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>艺艺要回来啦的荧光灯牌</title>
+    <style>
+        body{
+            margin: 0;
+        }
+        .bg{
+            background-color: #000;
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            font-size: 300px;
+            overflow: hidden;
+        }
+
+        .text{
+            position: absolute;
+            width: 200vw;
+            color: rgb(255,0,255);
+            height: 100vh;
+            line-height: 100vh;
+            left: 0;
+        }
+        
+        .controlboard{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 66px;
+            background-color: rgba(255,255,255,0.05);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center
+        }
+
+        .circle{
+            width: 44px;
+            height: 44px;
+            opacity: 0.1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg" id="bg">
+        <div class="text" id="text" onclick="changeText()">点击添加文字</div>
+    </div>
+    <div class="controlboard" id="colors">
+        <div style="background-color: rgb(255,255,255);" class="circle" onclick="changeColor(this);">白</div>
+        <div style="background-color: rgb(255,0,255);" class="circle" onclick="changeColor(this);">粉</div>
+        <div style="background-color: skyblue;" class="circle" onclick="changeColor(this);">粉</div>
+    </div>
+    <script>
+        var x = 0;
+        var textDom = document.getElementById('text');
+        var flexInterval;
+        var flashInterval;
+        var flashStatus = false;
+        var flexi = 0;
+        var flashi = 0;
+
+        function flexText(){
+            clearInterval(flashInterval);
+            textDom.style.display = 'inline';
+            textDom.style.fontSize = '300px';
+
+            flexInterval = setInterval(function(){
+                x = x - 20;
+                textDom.style.left = x + 'px';
+                if(x <= textDom.innerHTML.length * -300){
+                    x = textDom.innerHTML.length * 300;
+                    console.log('flex i=' + flexi);
+                    if(flexi > 1){
+                        flexi = 0;
+                        flashText();
+                    }else{
+                        flexi ++;
+                    }
+                }
+            }, 20);
+        }
+
+        function flashText(){
+            clearInterval(flexInterval);
+
+            textDom.style.fontSize = (document.body.clientWidth / textDom.innerHTML.length) + 'px';
+            textDom.style.left = 0;
+            flashInterval = setInterval(function(){
+
+                textDom.style.display = flashStatus?'inline':'none';
+                flashStatus = !flashStatus;
+                
+                console.log('flash i=' + flashi);
+                if(flashi > 10){
+                    flashi = 0;
+                    flexText();
+                }else{
+                    flashi ++;
+                }
+            },500)
+        }
+
+        function get(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return decodeURIComponent(r[2]);
+            return null;
+        }
+        
+        function changeText(){
+            var text = prompt('点击确定后你输入的文字会被替换到屏幕上');
+            if(text){
+                textDom.innerHTML = text?text:'点击添加文字';
+            }
+        }
+
+        var changeColorInterval;
+        var currentColorIndex = 0;
+
+        function changeColor(e){
+            clearInterval(changeColorInterval);
+            document.getElementById('bg').style.backgroundColor = 'black';
+            if(e == 250){
+                changeColorInterval = setInterval(function(){
+                    textDom.style.color = colorArr[currentColorIndex].color;
+                    if(currentColorIndex == colorArr.length - 1){
+                        currentColorIndex = 0;
+                    }else{
+                        currentColorIndex ++;
+                    }
+                },100);
+            }else if(e == 251){
+                changeColorInterval = setInterval(function(){
+                    textDom.style.color = colorArr[currentColorIndex].color;
+                    if(currentColorIndex == colorArr.length - 1){
+                        currentColorIndex = 0;
+                    }else{
+                        currentColorIndex ++;
+                    }
+                    document.getElementById('bg').style.backgroundColor = colorArr[currentColorIndex].color;
+                },100);
+            }else{
+                textDom.style.color = e.style.backgroundColor;
+            }
+        }
+
+        var colorArr = [
+            {
+                color: 'rgb(255,255,255)',
+                name: '白'
+            },
+            {
+                color: 'rgb(255,0,255)',
+                name: '粉'
+            },
+            {
+                color: 'skyblue',
+                name: '蓝'
+            },
+            {
+                color: 'rgb(0,255,255)',
+                name: '青'
+            },
+            {
+                color: 'rgb(127,255,212)',
+                name: '碧'
+            },
+            {
+                color: 'rgb(0,255,127)',
+                name: '春'
+            },
+            {
+                color: 'rgb(245,245,220)',
+                name: '米'
+            },
+            {
+                color: 'rgb(255,165,0)',
+                name: '橙'
+            }
+        ];
+
+        window.onload = function(){
+            var text = get('text');
+            if(text){
+                document.getElementById('text').innerHTML = text;
+            }
+            document.getElementById('colors').innerHTML = '<div class="circle" style="background-color: white;color: black;" onclick="changeColor(250);">乱</div><div class="circle" style="background-color: white;color: black;" onclick="changeColor(251);">魔</div>';
+            for(var i = 0; i < colorArr.length; i ++){
+                document.getElementById('colors').innerHTML += '<div style="background-color: '+ colorArr[i].color +';" class="circle" onclick="changeColor(this);">'+ colorArr[i].name +'</div>'
+            }
+            flashText();
+        }
+    </script>
+</body>
+</html>
