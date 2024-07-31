@@ -31,6 +31,7 @@ const dataStore = useDataStore()
         animation-duration: v-bind('dataStore.animationTime');
         animation-iteration-count: infinite;
         animation-timing-function: linear;
+        word-break: break-all;
     }
 }
 </style>
