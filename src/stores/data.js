@@ -236,15 +236,16 @@ export const useDataStore = defineStore('data', () => {
 
   const showHelp = () => {
     return showDialog({
-        title: '欢迎使用 xtLightBoard',
+        title: '欢迎使用显眼包应援灯牌',
         messageAlign: 'left',
         allowHtml: true,
         message: h('div', {}, [
             h('div', {}, "这是一个用来在演唱会上当显眼包的灯牌"),
             h('div', {}, " "),
-            h('div', {}, "右上角是菜单键，什么都能设置。 \n记得横屏使用。希望你闪得开心。"),
+            h('div', {}, "记得横屏使用。希望你闪得开心。\n右上角是菜单键，什么都能设置。"),
             h('div', {}, " "),
-            h('a', {style: 'margin-top: 20px;', href: 'https://thebestxt.cc/pages/about.html', target: '_blank'}, "是 thebestxt 做的"),
+            h('a', {style: 'margin-top: 20px;', href: 'https://thebestxt.cc/pages/about.html', target: '_blank'}, "是 xt 做的"),
+            h('div', {}, "因为他这周要去看 Vae 的演唱会了。"),
         ]),
     }).then(() => {
       localStorage.setItem('welcome_finish', 1)

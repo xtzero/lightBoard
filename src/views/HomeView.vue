@@ -30,7 +30,8 @@ const showHomeGuide = () => {
             showProgress: true,
             steps: [
                 { element: '#aaaaa', popover: { title: '提示', description: '欢迎使用，屏幕中间是正在飞行的弹幕', side: 'top' } },
-                { element: '#aaaaa', popover: { title: '全屏显示', description: 'iOS 端复制当前页面链接到 safari 中打开，点击分享按钮，点击「添加到主屏幕」。然后回到桌面会发现有个新的图标，点开即可。', side: 'top' } },
+                { element: '#aaaaa', popover: { title: '全屏显示 - iOS', description: 'iOS 端复制当前页面链接到 safari 中打开，点击分享按钮，点击「添加到主屏幕」。然后回到桌面会发现有个新的图标，点开即可。', side: 'top' } },
+                { element: '#aaaaa', popover: { title: '全屏显示 - Android', description: '随便找一个支持全屏显示的浏览器就好啦，我也不知道怎么办，因为我没有 Android 设备 (￣.￣)', side: 'top' } },
                 { element: '#menu-btn', popover: { title: '提示', description: '点击这里显示配置项' } }
             ],
             nextBtnText: '下一步',
@@ -66,12 +67,9 @@ const toggleMenuShow = v => {
                     { element: '#save-setting', popover: { title: '🧚 预设', description: '点击这里可以保存预设，不光后面自己还能用，还可以分享给其他人。大家使用同样炫酷的灯牌，队形才整齐！' } },
                     { element: '#import-setting', popover: { title: '🧚 预设', description: '如果别人分享了预设给你，你可以复制对方发过来的预设代码，然后点击这里导入预设。' } },
                     { element: '.text-field', popover: { title: '弹幕内容 😈', description: '在这里输入弹幕内容，最多 50 个字，输入的过程中后面会实时显示' } },
-                    { element: '.font-size-field', popover: { title: '⚽️ 字体大小', description: '拖动调整字体大小~' } },
                     { element: '.behavior-field', popover: { title: '🐦 行为', description: '「行为」越多，你的灯牌越炫酷！' } },
-                    { element: '.speed-field', popover: { title: '🚀 飞行速度', description: '拖动来改变弹幕的飞行速度' } },
                     { element: '.flashspeed-field', popover: { title: '💥 闪烁速度', description: '拖动来改变背景的闪烁速度' } },
                     { element: '.text-color-field', popover: { title: '🔴 字体颜色', description: '预设的一些颜色，不够用的话后面我会往里加' } },
-                    { element: '.bg-color-field', popover: { title: '🔵 背景颜色', description: '预设的一些颜色，不够用的话后面我会往里加' } },
                     { element: '.statistic-field', popover: { title: '🎉 哇哦', description: '这么一个破玩意被这么多人用过了' } },
                     { element: '.aaaaa', popover: { title: '🎉 开始使用吧', description: '终于做完了，累死了。这周六就要去看许嵩了，嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿...' } },
                 ],
